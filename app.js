@@ -73,12 +73,21 @@ function deleteNote(index)                                      //function call 
     else{
         notesObj = JSON.parse(notes);
     }
+    if(notesObj.length == 1)
+    {
+        notesObj.splice(index,1);        //removes one elemnet starting from index
+        //we have deleted that note in our local notesObj but we have to update our local storage
+        localStorage.setItem("notes",JSON.stringify(notesObj));
+        let notesEle = document.getElementById('previous-notes-container');
+        notesEle.innerHTML = "";
+    }
+    else{
     notesObj.splice(index,1);        //removes one elemnet starting from index
     //we have deleted that note in our local notesObj but we have to update our local storage
     localStorage.setItem("notes",JSON.stringify(notesObj));
   
     shownotes();
-
+    }
 }
 
 //search function
